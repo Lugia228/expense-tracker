@@ -27,7 +27,7 @@ class Expenditure:
         return {"name": self.name, "amount": self.amount, "currency" : self.currency, "isExpense": self.isExpense, "items":self.items}
 
 def create_expenditure(isExpense, data):
-    """Create expense or income using class instantiation. data is a Tuple (name, amount, currency, isExpense, items)"""
+    """Create expense or income using class instantiation. data is a Tuple (name, amount, currency, isExpense, items #List of objects [{}])"""
     current_expenditure = Expenditure(*data).fetch_expenditure()
     total_money = 0 #Ideally picked from storage
     default_currency = "HKD" #Ideally picked from storage
