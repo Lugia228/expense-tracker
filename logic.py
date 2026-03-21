@@ -1,3 +1,4 @@
+from datetime import datetime
 import requests
 #Settingd logic
 def save_settings(info):
@@ -15,11 +16,14 @@ class Expense:
         self.category = category
         self.currency = currency
         self.amount = amount
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
         self.isExpense = True
         self.items = items
         
     def update_expense(self, name, amount, currency, items):
         self.name = name
+        self.updated_at = datetime.now()
         self.amount = amount
         self.currency = currency
         self.items = items
@@ -28,7 +32,7 @@ class Expense:
         return "Expense deleted successfully"
 
     def fetch_expense(self):
-        return {"name": self.name, "amount": self.amount, "currency" : self.currency, "isExpense": self.isExpense, "category" : self.category, "items": self.items}
+        return {"name": self.name, "amount": self.amount, "currency" : self.currency, "isExpense": self.isExpense, "category" : self.category, "items": self.items, "created_at": self.created_at, "updated_at": self.updated_at}
 
 class Income(Expense):
     """Object for incomes"""
@@ -76,7 +80,8 @@ def create_expense_or_income(isExpense, data):
                 print(e)
         else:
             total_money += current["amount"]
-        print(total_money)
+    
+    print(total_money, 'class test', current)
 
     #Storage function should store data pesistently using expense_or_income.fetch_expense()
 
